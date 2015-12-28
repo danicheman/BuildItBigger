@@ -9,6 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nick.myapplication.backend.myApi.model.Joke;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+
+import retrofit.Call;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
+import retrofit.http.Body;
+import retrofit.http.GET;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +33,7 @@ import android.view.ViewGroup;
 public class DisplayJokeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String API_BASE_URL = "http://localhost:8080/_ah/myApi/v1/";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -46,7 +58,6 @@ public class DisplayJokeFragment extends Fragment {
     public static DisplayJokeFragment newInstance(String param1, String param2) {
         DisplayJokeFragment fragment = new DisplayJokeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -56,7 +67,6 @@ public class DisplayJokeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -108,9 +118,39 @@ public class DisplayJokeFragment extends Fragment {
     }
 
     class GCELoadJoke extends AsyncTask<Void,Void,Void>  {
+
+        private Retrofit retrofit;
+        private Gson gson;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+            retrofit = new Retrofit.Builder().baseUrl(API_BASE_URL).addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+        }
+
         @Override
         protected Void doInBackground(Void... params) {
+
+            JokeApiEndpointInterface apiService = retrofit.create(JokeApiEndpointInterface.class);
+
+            try {
+                Call<Joke> call = apiService.getJoke();
+                call.execute();
+            } catch (IOException e) {
+                //handle it!
+            }
+
             return null;
         }
+
+
+    }
+    public interface JokeApiEndpointInterface {
+        @GET("/joke")
+        Call<Joke> getJoke();
     }
 }

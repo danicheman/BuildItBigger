@@ -38,6 +38,7 @@ public class MyEndpoint {
     @ApiMethod(name = "getJoke")
     public Joke getJoke() {
         JokeSmith jokeSmith = new JokeSmith();
+
         return jokeSmith.getJoke();
     }
 }

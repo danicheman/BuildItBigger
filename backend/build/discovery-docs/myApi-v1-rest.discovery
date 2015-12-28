@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/oT4HT0gNYpd7yFTYdWUXmOfM_j8\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/7UMMj-C4wIisL4Zl3SPmo4ocX6U\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -88,6 +88,17 @@
   }
  },
  "methods": {
+  "getJoke": {
+   "id": "myApi.getJoke",
+   "path": "joke",
+   "httpMethod": "GET",
+   "response": {
+    "$ref": "Joke"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "sayHi": {
    "id": "myApi.sayHi",
    "path": "sayHi/{name}",
@@ -108,23 +119,6 @@
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]
-  }
- },
- "resources": {
-  "myEndpoint": {
-   "methods": {
-    "getJoke": {
-     "id": "myApi.myEndpoint.getJoke",
-     "path": "joke",
-     "httpMethod": "GET",
-     "response": {
-      "$ref": "Joke"
-     },
-     "scopes": [
-      "https://www.googleapis.com/auth/userinfo.email"
-     ]
-    }
-   }
   }
  }
 }

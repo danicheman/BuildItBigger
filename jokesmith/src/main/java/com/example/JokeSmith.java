@@ -5,6 +5,8 @@ import com.werkncode.ChuckNorris;
 
 public class JokeSmith {
     public Joke getJoke() {
-        return new Joke(ChuckNorris.getRandomJoke());
+        Joke j = new Joke();
+        j.set(ChuckNorris.getRandomJoke());
+        return j;
     }
 }
