@@ -5,11 +5,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.example.nick.myapplication.backend.myApi.model.Joke;
+import com.example.Joke;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,6 +19,7 @@ import java.io.IOException;
 
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
+import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -33,7 +36,7 @@ import retrofit.http.GET;
 public class DisplayJokeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String API_BASE_URL = "http://localhost:8080/_ah/myApi/v1/";
+
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -41,7 +44,7 @@ public class DisplayJokeFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
+    private TextView mJokeText;
     public DisplayJokeFragment() {
         // Required empty public constructor
     }
@@ -75,7 +78,11 @@ public class DisplayJokeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_display_joke, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_display_joke, container, false);
+
+        //grab the view's joke displaying text view
+        mJokeText = (TextView)rootView.findViewById(R.id.joke_text);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -102,6 +109,9 @@ public class DisplayJokeFragment extends Fragment {
         mListener = null;
     }
 
+    private void displayJoke(Joke joke) {
+
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -117,8 +127,11 @@ public class DisplayJokeFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    class GCELoadJoke extends AsyncTask<Void,Void,Void>  {
+    class GCELoadJoke extends AsyncTask<Void,Void,Joke>  {
 
+        private static final String TAG = "GCELoadJoke";
+
+        private static final String API_BASE_URL = "http://localhost:8080/_ah/myApi/v1/";
         private Retrofit retrofit;
         private Gson gson;
 
@@ -133,21 +146,32 @@ public class DisplayJokeFragment extends Fragment {
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Joke doInBackground(Void... params) {
 
             JokeApiEndpointInterface apiService = retrofit.create(JokeApiEndpointInterface.class);
 
             try {
                 Call<Joke> call = apiService.getJoke();
-                call.execute();
+                Response<Joke> response = call.execute();
+
+                if (response.isSuccess()) {
+                    Log.d(TAG, "doInBackground - success: " + response.toString());
+                    return response.body();
+                }
+
             } catch (IOException e) {
                 //handle it!
+                Log.e(TAG, "doInBackground: IO Exception occured: "+ e.getMessage() );
             }
 
             return null;
         }
 
-
+        @Override
+        protected void onPostExecute(Joke joke) {
+            super.onPostExecute(joke);
+            mJokeText.setText(joke.getData());
+        }
     }
     public interface JokeApiEndpointInterface {
         @GET("/joke")
