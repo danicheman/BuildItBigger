@@ -43,10 +43,14 @@ public class DisplayJokeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private JokeButtonListener mListener;
     private TextView mJokeText;
     public DisplayJokeFragment() {
         // Required empty public constructor
+    }
+
+    public interface JokeButtonListener {
+        void onJokeButtonPressed(Uri uri);
     }
 
     /**
@@ -88,7 +92,7 @@ public class DisplayJokeFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onJokeButtonPressed(uri);
         }
     }
 
@@ -96,10 +100,10 @@ public class DisplayJokeFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+            mListener = (JokeButtonListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement JokeButtonListener");
         }
     }
 
