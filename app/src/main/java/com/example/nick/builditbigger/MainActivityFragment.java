@@ -27,7 +27,7 @@ public class MainActivityFragment extends Fragment implements DisplayJokeFragmen
 
         View layout = inflater.inflate(R.layout.fragment_main, container, false);
         Button button = (Button)layout.findViewById(R.id.button);
-        button.setOnClickListener((View.OnClickListener) getActivity());
+        //button.setOnClickListener((DisplayJokeFragment.JokeButtonListener) getActivity());
         return layout;
     }
 
