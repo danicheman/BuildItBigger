@@ -28,20 +28,19 @@ import retrofit.http.GET;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DisplayJokeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link DisplayJokeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DisplayJokeFragment extends Fragment {
+public class DisplayJokeFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    private static final String ARG_PARAM2 = "param2";
-
+    public static final String ARG_KEY = "JOKE";
+    private static final String TAG = "DisplayJokeFragment";
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String joke;
+
 
     private JokeButtonListener mListener;
     private TextView mJokeText;
@@ -49,32 +48,26 @@ public class DisplayJokeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public interface JokeButtonListener {
-        void onJokeButtonPressed(Uri uri);
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param joke A string containing a joke.
      * @return A new instance of fragment DisplayJokeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DisplayJokeFragment newInstance(String param1, String param2) {
+    public static DisplayJokeFragment newInstance(String joke) {
         DisplayJokeFragment fragment = new DisplayJokeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_KEY, joke);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onClick(View v) {
+        if (mListener != null) {
+            mListener.onJokeButtonPressed();
         }
     }
 
@@ -83,23 +76,30 @@ public class DisplayJokeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_display_joke, container, false);
-
         //grab the view's joke displaying text view
-        mJokeText = (TextView)rootView.findViewById(R.id.joke_text);
-        return rootView;
-    }
+        mJokeText = (TextView) rootView.findViewById(R.id.joke_text);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onJokeButtonPressed(uri);
+
+        Bundle args = getArguments();
+        if (args != null && args.containsKey(ARG_KEY)) {
+            joke = args.getString(ARG_KEY);
+
+            mJokeText.setText(joke);
+        } else {
+            Log.d(TAG, "onCreateView: No joke in args.");
         }
+
+        if (getContext() instanceof DisplayJokeActivity) {
+            Log.d(TAG, "onCreateView: Getting joke from activity.");
+            mJokeText.setText(((DisplayJokeActivity) getContext()).joke);
+        }
+        return rootView;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
+        if (context instanceof JokeButtonListener) {
             mListener = (JokeButtonListener) context;
         } else {
             throw new RuntimeException(context.toString()
@@ -113,72 +113,10 @@ public class DisplayJokeFragment extends Fragment {
         mListener = null;
     }
 
-    private void displayJoke(Joke joke) {
-
-    }
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    public interface JokeButtonListener {
+        void onJokeButtonPressed();
     }
 
-    class GCELoadJoke extends AsyncTask<Void,Void,Joke>  {
-
-        private static final String TAG = "GCELoadJoke";
-
-        private static final String API_BASE_URL = "http://localhost:8080/_ah/myApi/v1/";
-        private Retrofit retrofit;
-        private Gson gson;
 
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-            retrofit = new Retrofit.Builder().baseUrl(API_BASE_URL).addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-        }
-
-        @Override
-        protected Joke doInBackground(Void... params) {
-
-            JokeApiEndpointInterface apiService = retrofit.create(JokeApiEndpointInterface.class);
-
-            try {
-                Call<Joke> call = apiService.getJoke();
-                Response<Joke> response = call.execute();
-
-                if (response.isSuccess()) {
-                    Log.d(TAG, "doInBackground - success: " + response.toString());
-                    return response.body();
-                }
-
-            } catch (IOException e) {
-                //handle it!
-                Log.e(TAG, "doInBackground: IO Exception occured: "+ e.getMessage() );
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Joke joke) {
-            super.onPostExecute(joke);
-            mJokeText.setText(joke.getData());
-        }
-    }
-    public interface JokeApiEndpointInterface {
-        @GET("/joke")
-        Call<Joke> getJoke();
-    }
 }

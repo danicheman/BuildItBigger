@@ -1,14 +1,27 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/display_joke_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.nick.builditbigger.DisplayJokeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/joke_text"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/default_joke_text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/joke_text"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tell_another_joke" />
+
+
+</RelativeLayout>

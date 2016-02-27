@@ -2,7 +2,11 @@
     <string name="app_name">Nick\'s Joke App</string>
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Click the button</string>
+
+    <string name="default_joke_text">Joke goes here.</string>
     <string name="tell_joke">Tell me a Joke!</string>
+    <string name="tell_another_joke">Tell me another joke!</string>
+    <string name="loading">Your joke is loading!</string>
+
+    <string name="title_activity_loading">LoadingActivity</string>
 </resources>

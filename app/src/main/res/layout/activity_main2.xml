@@ -9,4 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DisplayJokeActivity">
 
+    <fragment
+        android:id="@+id/display_joke_fragment"
+        android:name="com.example.nick.builditbigger.DisplayJokeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

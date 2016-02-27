@@ -1,7 +1,9 @@
 package com.example.nick.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,10 +33,8 @@ public class MainActivity extends AppCompatActivity implements DisplayJokeFragme
             @Override
             public void onClick(View view) {
 
-                new EndpointsAsyncTask().execute(new Pair<Context, String>(getParent(), "Manfred"));
-
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }
@@ -79,8 +79,11 @@ public class MainActivity extends AppCompatActivity implements DisplayJokeFragme
     }*/
 
     @Override
-    public void onJokeButtonPressed(Uri uri) {
+    public void onJokeButtonPressed() {
         Log.e(TAG, "onJokeButtonPressed: Button pressed, main activity.");
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+        Intent i = new Intent(getApplicationContext(), LoadingActivity.class);
+        startActivity(i);
     }
+
+
 }
