@@ -1,19 +1,10 @@
 package com.example.nick.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.Pair;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,15 +19,6 @@ public class MainActivity extends AppCompatActivity implements DisplayJokeFragme
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -60,28 +42,13 @@ public class MainActivity extends AppCompatActivity implements DisplayJokeFragme
 
         return super.onOptionsItemSelected(item);
     }
-/*
-    @Override
-    public void onClick(View v) {
-        Log.d(TAG, "onClick: Main Fragment Click");
-        //todo:confirm that view being replaced exists?
-        switch (v.getId()) {
-            case R.id.button:
-                if(findViewById(R.id.fragment) != null) {
-                    Log.d(TAG, "onClick: registered button click.");
-                    FragmentManager fm = getSupportFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragment, new DisplayJokeFragment(), "display_joke");
-                    ft.commit();
-                }
-                break;
-        }
-    }*/
 
     @Override
     public void onJokeButtonPressed() {
-        Log.e(TAG, "onJokeButtonPressed: Button pressed, main activity.");
         Intent i = new Intent(getApplicationContext(), LoadingActivity.class);
+
+        //pressing back should not automatically load another joke.
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
     }
 

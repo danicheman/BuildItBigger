@@ -2,10 +2,8 @@ package com.example.nick.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.Pair;
-import android.widget.Toast;
+
 
 import com.example.nick.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -67,12 +65,11 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Log.e("EPAT", "onPostExecute: " + result);
         mListener.onJokeLoaded(result);
     }
 
     public interface JokeLoadListener {
-        public void onJokeLoaded(String joke);
+        void onJokeLoaded(String joke);
     }
 }
 

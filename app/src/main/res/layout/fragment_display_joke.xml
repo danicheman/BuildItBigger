@@ -5,23 +5,24 @@
     android:layout_height="match_parent"
     tools:context="com.example.nick.builditbigger.DisplayJokeFragment">
 
+
+
+    <Button
+        android:id="@+id/refresh_joke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/tell_another_joke" />
+
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/joke_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/refresh_joke"
         android:text="@string/default_joke_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/joke_text"
-        android:layout_centerHorizontal="true"
-        android:text="@string/tell_another_joke" />
-
 
 </RelativeLayout>

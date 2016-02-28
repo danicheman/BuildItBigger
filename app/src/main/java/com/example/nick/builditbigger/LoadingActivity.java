@@ -28,23 +28,12 @@ public class LoadingActivity extends AppCompatActivity implements JokeLoadListen
             Log.d(TAG, "onCreate: Not loading a new joke.");
         }
 
-
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /**
      * need to stop loading animation..
      *
-     * @param joke
+     * @param joke a funny Chuck Norris one-liner
      */
     public void onJokeLoaded(String joke) {
         Intent i = new Intent(getApplicationContext(), DisplayJokeActivity.class);
