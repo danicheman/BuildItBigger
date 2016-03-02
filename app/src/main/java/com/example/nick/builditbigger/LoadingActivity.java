@@ -10,7 +10,6 @@ import com.example.nick.builditbigger.EndpointsAsyncTask.JokeLoadListener;
 
 public class LoadingActivity extends AppCompatActivity implements JokeLoadListener {
 
-    private static final String TAG = "LoadingActivity";
     private EndpointsAsyncTask jokeTask;
 
     @Override
@@ -20,13 +19,8 @@ public class LoadingActivity extends AppCompatActivity implements JokeLoadListen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (jokeTask == null) {
-            Log.d(TAG, "onCreate: loading a new joke.");
-            jokeTask = new EndpointsAsyncTask();
-            jokeTask.execute(this);
-        } else {
-            Log.d(TAG, "onCreate: Not loading a new joke.");
-        }
+        //Launch the Async Task to load the joke.
+        (new EndpointsAsyncTask()).execute(this);
 
     }
 

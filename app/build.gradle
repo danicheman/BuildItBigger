@@ -17,8 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         paid {
+            //applicationId paid
         }
         free {
+            //applicationId free
         }
     }
 }
