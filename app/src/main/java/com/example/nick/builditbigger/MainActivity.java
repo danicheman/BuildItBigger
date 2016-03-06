@@ -45,7 +45,15 @@ public class MainActivity extends AppCompatActivity implements DisplayJokeFragme
 
     @Override
     public void onJokeButtonPressed() {
-        Intent i = new Intent(getApplicationContext(), LoadingActivity.class);
+
+        Intent i;
+
+        if (BuildConfig.HAS_ADS) {
+            i = new Intent(getApplicationContext(), FreeLoadingActivity.class);
+        } else {
+            i = new Intent(getApplicationContext(), LoadingActivity.class);
+        }
+
 
         //pressing back should not automatically load another joke.
         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

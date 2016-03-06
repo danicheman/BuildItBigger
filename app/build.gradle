@@ -1,26 +1,48 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'builditbigger'
+            keyPassword 'password'
+            storeFile file('C:/Users/NICK/AndroidStudioProjects/BuildItBigger/keystore.jks')
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "com.example.nick.builditbigger"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [loadingActivity: ".LoadingActivity"]
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
+    }
+    productFlavors {
         paid {
             //applicationId paid
+            applicationId "com.example.nick.paid"
+            buildConfigField "boolean", "HAS_ADS", "false"
         }
         free {
             //applicationId free
+            applicationId "com.example.nick.free"
+            buildConfigField "boolean", "HAS_ADS", "true"
+            manifestPlaceholders = [loadingActivity: ".FreeLoadingActivity"]
+            signingConfig signingConfigs.config
+        }
+    }
+    sourceSets {
+        free {
+            manifest.srcFile 'src/free/AndroidManifest.xml'
         }
     }
 }
@@ -33,4 +55,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
+    freeCompile 'com.google.android.gms:play-services-ads:8.4.0'
 }

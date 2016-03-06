@@ -7,6 +7,4 @@
     <string name="tell_joke">Tell me a Joke!</string>
     <string name="tell_another_joke">Tell me another joke!</string>
     <string name="loading">Your joke is loading!</string>
-
-    <string name="title_activity_loading">LoadingActivity</string>
 </resources>

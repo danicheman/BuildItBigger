@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".DisplayJokeActivity" />
         <activity
-            android:name=".LoadingActivity"
+            android:name=".FreeLoadingActivity"
             android:label="@string/loading"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
