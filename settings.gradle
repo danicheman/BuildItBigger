@@ -1,1 +1,1 @@
-include ':app', ':backend', ':jokesmith', ':icndb-java:ChuckNorris'
+include ':app', ':backend', ':jokesmith', ':chuckNorrisDb:ChuckNorris', ':jokedisplaylibrary'

@@ -1,4 +1,4 @@
-package com.example.nick.builditbigger;
+package com.example.nick.jokedisplaylibrary;
 
 import android.content.Context;
 import android.os.Bundle;

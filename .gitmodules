@@ -1,0 +1,3 @@
+[submodule "chuckNorrisDb"]
+	path = chuckNorrisDb
+	url = https://github.com/werkn/icndb-java.git

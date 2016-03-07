@@ -30,28 +30,21 @@ android {
         paid {
             //applicationId paid
             applicationId "com.example.nick.paid"
-            buildConfigField "boolean", "HAS_ADS", "false"
         }
         free {
             //applicationId free
             applicationId "com.example.nick.free"
-            buildConfigField "boolean", "HAS_ADS", "true"
-            manifestPlaceholders = [loadingActivity: ".FreeLoadingActivity"]
             signingConfig signingConfigs.config
         }
     }
-    sourceSets {
-        free {
-            manifest.srcFile 'src/free/AndroidManifest.xml'
-        }
-    }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile project(':jokesmith')
+    compile project(':jokedisplaylibrary')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'

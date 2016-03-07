@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayJokeActivity" />
+        <activity android:name="com.example.nick.jokedisplaylibrary.DisplayJokeActivity" />
         <activity
             android:name=".LoadingActivity"
             android:label="@string/loading"

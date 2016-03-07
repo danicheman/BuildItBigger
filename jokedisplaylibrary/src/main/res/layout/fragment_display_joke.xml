@@ -3,7 +3,7 @@
     android:id="@+id/display_joke_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nick.builditbigger.DisplayJokeFragment">
+    tools:context="com.example.nick.jokedisplaylibrary.DisplayJokeFragment">
 
 
 

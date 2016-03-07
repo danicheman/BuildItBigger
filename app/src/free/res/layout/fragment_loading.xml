@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nick.builditbigger.FreeLoadingActivityFragment">
+    tools:context="com.example.nick.builditbigger.LoadingActivityFragment">
     <!-- Free Loading Activity Fragment class is used here to load the ads -->
     <ProgressBar
         android:id="@+id/spinner"

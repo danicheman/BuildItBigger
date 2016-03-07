@@ -1,4 +1,4 @@
-package com.example.nick.builditbigger;
+package com.example.nick.jokedisplaylibrary;
 
 import org.junit.Test;
 

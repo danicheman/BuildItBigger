@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.example.nick.builditbigger.EndpointsAsyncTask.JokeLoadListener;
+import com.example.nick.jokedisplaylibrary.DisplayJokeActivity;
+import com.example.nick.jokedisplaylibrary.DisplayJokeFragment;
 
 public class LoadingActivity extends AppCompatActivity implements JokeLoadListener {
     private static final String TAG = "LoadingActivity";

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Joke Display Library</string>
+    <string name="default_joke_text">Joke goes here.</string>
+    <string name="tell_another_joke">Tell me another joke!</string>
+</resources>

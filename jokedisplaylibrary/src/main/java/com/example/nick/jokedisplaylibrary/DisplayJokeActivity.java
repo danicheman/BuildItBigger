@@ -1,4 +1,4 @@
-package com.example.nick.builditbigger;
+package com.example.nick.jokedisplaylibrary;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -27,18 +27,16 @@ public class DisplayJokeActivity extends AppCompatActivity implements DisplayJok
 
     @Override
     public void onJokeButtonPressed() {
+        //disabled, will have to use back button.
 
-        Intent i;
+        /*Intent i;
 
-        if (BuildConfig.HAS_ADS) {
-            i = new Intent(getApplicationContext(), FreeLoadingActivity.class);
-        } else {
-            i = new Intent(getApplicationContext(), LoadingActivity.class);
-        }
+        i = new Intent(getApplicationContext(), LoadingActivity.class);
+
 
         //pressing back should not automatically load another joke.
         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(i);
+        startActivity(i);*/
 
     }
 }

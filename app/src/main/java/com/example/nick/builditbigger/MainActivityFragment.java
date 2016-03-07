@@ -1,9 +1,6 @@
 package com.example.nick.builditbigger;
 
 import android.content.Context;
-import android.net.Uri;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.nick.jokedisplaylibrary.DisplayJokeFragment;
 
 /**
  * A placeholder fragment containing a simple view.

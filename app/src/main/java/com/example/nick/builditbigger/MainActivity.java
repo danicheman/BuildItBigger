@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.nick.jokedisplaylibrary.DisplayJokeFragment;
 
 public class MainActivity extends AppCompatActivity implements DisplayJokeFragment.JokeButtonListener {
 
@@ -46,14 +47,7 @@ public class MainActivity extends AppCompatActivity implements DisplayJokeFragme
     @Override
     public void onJokeButtonPressed() {
 
-        Intent i;
-
-        if (BuildConfig.HAS_ADS) {
-            i = new Intent(getApplicationContext(), FreeLoadingActivity.class);
-        } else {
-            i = new Intent(getApplicationContext(), LoadingActivity.class);
-        }
-
+        Intent i = new Intent(getApplicationContext(), LoadingActivity.class);
 
         //pressing back should not automatically load another joke.
         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
