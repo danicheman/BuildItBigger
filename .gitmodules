@@ -1,3 +1,6 @@
 [submodule "chuckNorrisDb"]
 	path = chuckNorrisDb
 	url = https://github.com/danicheman/icndb-java.git
+[submodule "Submod"]
+	branch = Development
+	url = https://github.com/danicheman/icndb-java.git
